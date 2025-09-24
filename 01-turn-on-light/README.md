@@ -64,12 +64,7 @@ Simulasi lampu lalu lintas sederhana menggunakan 3 LED (Merah, Kuning, Hijau) ya
 
 ---
 ⬅️ [Kembali ke Menu Utama](../README.md) | ➡️ [Proyek Selanjutnya](../02-proximity-sensor/)
-  digitalWrite(ledk, LOW);
-  digitalWrite(ledh, HIGH);
-  Serial.println("Hijau menyala");
-  delay(1000); // tunggu 1 detik
-}
-```
+
 
 ### Cara Kerja Program
 
@@ -80,6 +75,3 @@ Secara keseluruhan, program ini:
 3. Menyalakan LED hijau selama 1 detik → tampilkan "Hijau menyala"
 4. Ulangi terus-menerus
 
-### Coba Demo Proyek Ini 
-
-[🔌 Klik untuk Simulasi di Wokwi](https://wokwi.com/projects/418127986005632001)
