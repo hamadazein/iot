@@ -54,7 +54,7 @@ Simulasi lampu lalu lintas sederhana menggunakan 3 LED (Merah, Kuning, Hijau) ya
 - **Function**: Membuat fungsi untuk modularitas kode
 
 ## 🔬 Simulasi Online
-[🔌 Coba Simulasi di Wokwi]([https://wokwi.com/](https://wokwi.com/projects/418127986005632001)
+🔌 Coba Simulasi di Wokwi]([https://wokwi.com/](https://wokwi.com/projects/418127986005632001)
 
 ## 🚀 Pengembangan Lanjutan
 - Tambahkan tombol untuk mengontrol lampu manual
