@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino IoT Projects - Collection by Hamada Zein</title>
+    <meta name="description" content="Koleksi lengkap proyek Arduino IoT untuk pembelajaran dan pengembangan. Mulai dari LED sederhana hingga sistem parkir pintar.">
+    <meta name="author" content="Hamada Zein">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Arduino IoT Projects Collection">
+    <meta property="og:description" content="Koleksi proyek Arduino IoT dengan tutorial lengkap dan simulasi online">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hamadazein.github.io/arduino-iot-projects/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #00979D;
+            --secondary-color: #E47128;
+            --accent-color: #F39C12;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --bg-dark: #2C3E50;
+            --border-color: #E5E7EB;
+            --success-color: #27AE60;
+            --warning-color: #F39C12;
+            --danger-color: #E74C3C;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #006B70);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
+            margin: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .project-number {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .difficulty.easy {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+
+        .difficulty.medium {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+
+        .difficulty.hard {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+
+        .components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-tag {
+            background: var(--bg-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links .btn {
+            flex: 1;
+            text-align: center;
+            justify-content: center;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495E;
+            color: #95A5A6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🤖</div>
+                <h1>Arduino IoT Projects</h1>
+                <p class="subtitle">Koleksi Lengkap Proyek Arduino untuk Pembelajaran dan Pengembangan IoT</p>
+                
+                <div class="header-badges">
+                    <span class="badge"><i class="fab fa-arduino"></i> Arduino Uno</span>
+                    <span class="badge"><i class="fas fa-code"></i> C++</span>
+                    <span class="badge"><i class="fas fa-certificate"></i> MIT License</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> Complete</span>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="https://github.com/hamadazein/arduino-iot-projects" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <a href="#projects" class="btn btn-secondary">
+                        <i class="fas fa-rocket"></i> Mulai Belajar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">7</span>
+                        <div class="stat-label">Proyek Lengkap</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <div class="stat-label">Level Kesulitan</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <div class="stat-label">Open Source</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <div class="stat-label">Simulasi Online</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">🚀 Proyek Arduino IoT</h2>
+                <p class="section-subtitle">
+                    Jelajahi koleksi proyek Arduino dari tingkat pemula hingga lanjutan. 
+                    Setiap proyek dilengkapi dengan kode yang terstruktur, dokumentasi lengkap, dan simulasi online.
+                </p>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Traffic Light -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">1</div>
+                            <h3 class="project-title">🚦 Traffic Light Simulation</h3>
+                            <p class="project-description">Simulasi lampu lalu lintas menggunakan 3 LED dengan kontrol timing yang presisi</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty easy">🟢 Mudah</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">LED x3</span>
+                                <span class="component-tag">Resistor 220Ω</span>
+                                <span class="component-tag">Breadboard</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/01-turn-on-light" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Proximity Sensor -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">2</div>
+                            <h3 class="project-title">📡 Ultrasonic Distance Sensor</h3>
+                            <p class="project-description">Pengukuran jarak real-time dengan sensor HC-SR04 dan validasi data</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty medium">🟡 Sedang</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">HC-SR04</span>
+                                <span class="component-tag">Arduino Uno</span>
+                                <span class="component-tag">Jumper Wire</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/02-proximity-sensor" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/projects/418680848311396353" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Buzzer Sound -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">3</div>
+                            <h3 class="project-title">🎵 Musical Buzzer</h3>
+                            <p class="project-description">Memainkan melodi "Fix You" by Coldplay dengan buzzer dan tone() function</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty easy">🟢 Mudah</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">Buzzer</span>
+                                <span class="component-tag">Arduino Uno</span>
+                                <span class="component-tag">Resistor</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/03-buzzer-sound" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: RGB Light -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">4</div>
+                            <h3 class="project-title">🌈 RGB Light Controller</h3>
+                            <p class="project-description">Kontrol warna RGB LED dengan PWM dan color mixing effects</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty medium">🟡 Sedang</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">RGB LED</span>
+                                <span class="component-tag">Resistor 220Ω</span>
+                                <span class="component-tag">Arduino Uno</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/04-rgb-light" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: LED Button -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">5</div>
+                            <h3 class="project-title">💡 LED Button Control</h3>
+                            <p class="project-description">Kontrol LED dengan push button, debouncing, dan toggle functionality</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty easy">🟢 Mudah</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">LED</span>
+                                <span class="component-tag">Push Button</span>
+                                <span class="component-tag">Pull-up Resistor</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/05-led-button" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Servo Motor -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">6</div>
+                            <h3 class="project-title">⚙️ Servo Motor Control</h3>
+                            <p class="project-description">Kontrol presisi servo motor SG90 dengan smooth movement dan positioning</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty medium">🟡 Sedang</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">Servo SG90</span>
+                                <span class="component-tag">Arduino Uno</span>
+                                <span class="component-tag">Power Supply</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/06-servo" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7: Smart Parking -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-number">7</div>
+                            <h3 class="project-title">🅿️ Smart Parking System</h3>
+                            <p class="project-description">Sistem parkir otomatis dengan sensor ultrasonik, servo gate, LCD, dan LED indicator</p>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="difficulty hard">🔴 Sulit</span>
+                            </div>
+                            <div class="components">
+                                <span class="component-tag">HC-SR04 x2</span>
+                                <span class="component-tag">Servo Motor</span>
+                                <span class="component-tag">LCD I2C</span>
+                                <span class="component-tag">LED Indicator</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/hamadazein/arduino-iot-projects/tree/main/07-smart-parking" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-code"></i> Code
+                                </a>
+                                <a href="https://wokwi.com/" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-play"></i> Simulasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">✨ Fitur Unggulan</h2>
+                <p class="section-subtitle">
+                    Setiap proyek dirancang dengan standar industri dan best practices untuk pembelajaran yang optimal
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3 class="feature-title">Dokumentasi Lengkap</h3>
+                        <p class="feature-description">
+                            Setiap proyek dilengkapi dengan README detail, diagram wiring, dan penjelasan kode yang mudah dipahami
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Kode Berkualitas</h3>
+                        <p class="feature-description">
+                            Kode yang clean, terstruktur, dan mengikuti best practices dengan komentar yang jelas
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title">Simulasi Online</h3>
+                        <p class="feature-description">
+                            Coba semua proyek secara online menggunakan Wokwi tanpa perlu hardware fisik
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Progressive Learning</h3>
+                        <p class="feature-description">
+                            Proyek disusun dari tingkat dasar hingga lanjutan untuk pembelajaran bertahap
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔓</div>
+                        <h3 class="feature-title">100% Open Source</h3>
+                        <p class="feature-description">
+                            Semua kode tersedia bebas dengan lisensi MIT untuk pembelajaran dan pengembangan
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3 class="feature-title">Community Driven</h3>
+                        <p class="feature-description">
+                            Proyek terbuka untuk kontribusi dan feedback dari komunitas Arduino Indonesia
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📧 Kontak</h3>
+                    <p>Punya pertanyaan atau saran? Jangan ragu untuk menghubungi!</p>
+                    <div class="social-links">
+                        <a href="https://github.com/hamadazein" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:hamada.zein@example.com" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/hamadazein" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/hamadazein" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>🔗 Resources</h3>
+                    <a href="https://www.arduino.cc/" target="_blank">Arduino Official</a>
+                    <a href="https://wokwi.com/" target="_blank">Wokwi Simulator</a>
+                    <a href="https://github.com/johnrickman/LiquidCrystal_I2C" target="_blank">LiquidCrystal I2C Library</a>
+                    <a href="https://fritzing.org/" target="_blank">Fritzing</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>📋 Quick Links</h3>
+                    <a href="#projects">Semua Proyek</a>
+                    <a href="https://github.com/hamadazein/arduino-iot-projects/issues" target="_blank">Report Issues</a>
+                    <a href="https://github.com/hamadazein/arduino-iot-projects/blob/main/LICENSE" target="_blank">MIT License</a>
+                    <a href="https://github.com/hamadazein/arduino-iot-projects/wiki" target="_blank">Documentation</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>🚀 Getting Started</h3>
+                    <a href="https://www.arduino.cc/en/software" target="_blank">Download Arduino IDE</a>
+                    <a href="https://github.com/hamadazein/arduino-iot-projects" target="_blank">Clone Repository</a>
+                    <a href="#projects">Browse Projects</a>
+                    <a href="https://github.com/hamadazein/arduino-iot-projects/blob/main/README.md" target="_blank">Read Documentation</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 <strong>Hamada Zein</strong>. Made with ❤️ for Arduino Community Indonesia</p>
+                <p>Licensed under MIT License | Built with GitHub Pages</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.project-card, .feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add loading animation to external links
+            document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                link.addEventListener('click', function() {
+                    const originalContent = this.innerHTML;
+                    this.innerHTML = '<div class="loading"></div>';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalContent;
+                    }, 1000);
+                });
+            });
+        });
+
+        // Add some interactive stats animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isNumber = !isNaN(finalValue);
+                
+                if (isNumber) {
+                    let currentValue = 0;
+                    const increment = Math.ceil(finalValue / 50);
+                    
+                    const updateStat = () => {
+                        currentValue += increment;
+                        if (currentValue >= finalValue) {
+                            stat.textContent = finalValue;
+                        } else {
+                            stat.textContent = currentValue;
+                            setTimeout(updateStat, 20);
+                        }
+                    };
+                    
+                    updateStat();
+                }
+            });
+        }
+
+        // Trigger stats animation when in view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.disconnect();
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

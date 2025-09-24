@@ -1,0 +1,66 @@
+# Arduino IDE
+*.ino.bak
+*.ino.orig
+*.hex
+*.elf
+*.map
+*.lst
+
+# Arduino build directory
+build/
+.build/
+
+# Arduino libraries (if using library manager)
+libraries/
+
+# VS Code Arduino extension
+.vscode/
+c_cpp_properties.json
+arduino.json
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+*.sublime-project
+*.sublime-workspace
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Log files
+*.log
+
+# Backup files
+*backup*
+*bak*
